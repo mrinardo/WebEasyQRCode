@@ -1,0 +1,138 @@
+// Integration of the Easy QR Code Javascript Library (https://github.com/ushelp/EasyQRCodeJS).
+//    
+// Revision:
+//    2020/11/06  (JMR, DAW) 
+//        Initial version.
+//
+
+Use cWebBaseControl.pkg
+
+// QR Code Correct Levels
+Enum_List
+    Define eqrcCorrectLevelM for 0
+    Define eqrcCorrectLevelL for 1
+    Define eqrcCorrectLevelH for 2
+    Define eqrcCorrectLevelQ for 3
+End_Enum_List
+
+Class cWebEasyQRCode is a cWebBaseControl
+    
+    Procedure Construct_Object
+        Forward Send Construct_Object
+
+        // Basic
+        { WebProperty=Client }
+        Property String psText "" // The text that goes inside the QR Code.
+        { WebProperty=Client }
+        Property Integer piQRCodeWidth 256
+        { WebProperty=Client }
+        Property Integer piQRCodeHeight 256
+        { WebProperty=Client }
+        Property String  psColorDark "#000000"
+        { WebProperty=Client }
+        Property String psColorLight "#ffffff"
+        { WebProperty=Client }
+        {EnumList="eqrcCorrectLevelM, eqrcCorrectLevelL, eqrcCorrectLevelH, eqrcCorrectLevelQ" }
+        Property Integer piCorrectLevel eqrcCorrectLevelH
+        { WebProperty=Client }
+        Property Number pnDotScale 1.0 // Dot style required Patterns. Ranges: 0-1.0
+        
+        // Quiet Zone
+        { WebProperty=Client }
+        Property Integer piQuietZone 0 // Quiet Zone size
+        { WebProperty=Client }
+        Property String psQuietZoneColor "transparent" // Background CSS color to Quiet Zone
+
+        // Logo options
+        { WebProperty=Client }
+        Property String psLogo "" // Image Path or Base64 encoded image. If Use relative address, relative to easy.qrcode.min.js
+        { WebProperty=Client }
+        Property Integer piLogoWidth 0
+        { WebProperty=Client }
+        Property Integer piLogoHeight 0
+        { WebProperty=Client }
+        Property Boolean pbLogoBackgroundTransparent False // Whether the background transparent image(PNG) shows transparency. When True, logoBackgroundColor is invalid.
+        { WebProperty=Client }
+        Property String psLogoBackgroundColor "#ffffff" // Set Background CSS Color when image background transparent. Valid when logoBackgroundTransparent is False.
+ 
+        // Backgroud Image options
+        { WebProperty=Client }
+        Property String psBackgroundImage "" // Background Image Path or Base64 encoded Image. If Use relative address, relative to easy.qrcode.min.js.
+        { WebProperty=Client }
+        Property Number pnBackgroundImageAlpha 1.0 // Background image transparency. Ranges: 0-1.0.
+        { WebProperty=Client }
+        Property Boolean pbAutoColor False // Automatic color adjustment.
+        
+        // Position Pattern Color options
+        { WebProperty=Client }
+        Property String psPO "" // Global Position Outer CSS color. If not Set, the defaut is colorDark.
+        { WebProperty=Client }
+        Property String psPI "" // Global Position Inner CSS color. If not Set, the defaut is colorDark.
+        { WebProperty=Client }
+        Property String psPO_TL "" // Position Outer CSS color - Top Left.
+        { WebProperty=Client }
+        Property String psPI_TL "" // Position Inner CSS color - Top Left.
+        { WebProperty=Client }
+        Property String psPO_TR "" // Position Outer CSS color - Top Right.
+        { WebProperty=Client }
+        Property String psPI_TR "" // Position Inner CSS color - Top Right.
+        { WebProperty=Client }
+        Property String psPO_BL "" // Position Outer CSS color - Bottom Left.
+        { WebProperty=Client }
+        Property String psPI_BL "" // Position Inner CSS color - Bottom Left.
+        
+        // Alignment Color options
+        { WebProperty=Client }
+        Property String psAO "" // Alignment Outer CSS color. If not Set, the defaut is colorDark.
+        { WebProperty=Client }
+        Property String psAI "" // Alignment Inner CSS color. If not Set, the defaut is colorDark.
+        
+        // Timing Pattern Color options
+        { WebProperty=Client }
+        Property String psTiming "" // Global Timing CSS color. If not Set, the defaut is colorDark.
+        { WebProperty=Client }
+        Property String psTiming_H "" // Horizontal timing CSS color.
+        { WebProperty=Client }
+        Property String psTiming_V "" // Vertical timing CSS color.
+        
+        // Title options
+        { WebProperty=Client }
+        Property String psTitle ""
+        { WebProperty=Client }
+        Property String psTitleFont "bold 16px Arial" // CSS Font.
+        { WebProperty=Client }
+        Property String psTitleColor "#000000" // CSS color.
+        { WebProperty=Client }
+        Property String psTitleBackgroundColor "#ffffff" // CSS color.
+        { WebProperty=Client }
+        Property Integer piTitleHeight 0 // Title Height, Include subTitle.
+        { WebProperty=Client }
+        Property Integer piTitleTop 30 // draws y coordinates.
+        
+        // SubTitle options
+        { WebProperty=Client }
+        Property String psSubTitle ""
+        { WebProperty=Client }
+        Property String psSubTitleFont "14px Arial" // CSS Font.
+        { WebProperty=Client }
+        Property String psSubTitleColor "#4F4F4F" // CSS color.
+        { WebProperty=Client }
+        Property Integer piSubTitleTop 0 // draws y coordinates. default is 0.
+
+        Set pbShowLabel to False
+        Set psJSClass to "df.WebEasyQRCode"
+    End_Procedure
+
+    Procedure End_Construct_Object
+        Forward Send End_Construct_Object
+
+    End_Procedure
+
+    // Updates the QR Code in the client with object properties' current values.
+    // Before sending this, make sure you change the value of any object properties, otherwise nothing will change.
+    // Mostly you'll want to change the psText property and send this message to update the QR Code in the client.
+    Procedure updateQRCode
+        Send ClientAction "updateQRCode"
+    End_Procedure
+
+End_Class
