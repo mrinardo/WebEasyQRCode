@@ -21,7 +21,7 @@ df.WebEasyQRCode = function WebEasyQRCode(sName, oParent){
     this.prop(df.tString, "psColorDark", "#000000");
     this.prop(df.tString, "psColorLight", "#ffffff");
     this.prop(df.tInt, "piCorrectLevel", 2); // H
-    this.prop(df.tNumber, "pnDotScale", 1.0);
+    this.prop(df.tNumber, "pnDotScale", 1);
 
     // Quiet Zone
     this.prop(df.tInt, "piQuietZone", 0);
@@ -90,7 +90,7 @@ df.defineClass("df.WebEasyQRCode", "df.WebBaseControl",{
             colorDark: this.psColorDark,
             colorLight: this.psColorLight,
             correctLevel: this.piCorrectLevel,
-            dotScale: this.pnDotScale.replace(',','.'),
+            dotScale: (typeof this.pnDotScale == "string" ? this.pnDotScale.replace(',','.') : this.pnDotScale), 
             quietZone: this.piQuietZone,
             quietZoneColor: this.psQuietZoneColor,
             logo: this.psLogo,
@@ -99,7 +99,7 @@ df.defineClass("df.WebEasyQRCode", "df.WebBaseControl",{
             logoBackgroundTransparent: (this.pbLogoBackgroundTransparent == '0' ? false : true),
             logoBackgroundColor: this.psLogoBackgroundColor,
             backgroundImage: this.psBackgroundImage,
-            backgroundImageAlpha: this.pnBackgroundImageAlpha.replace(',','.'),
+            backgroundImageAlpha: (typeof this.pnBackgroundImageAlpha == "string" ? this.pnBackgroundImageAlpha.replace(',','.') : this.pnBackgroundImageAlpha),
             autoColor: this.pbAutoColor,
             PO: this.psPO,
             PI: this.psPI,
